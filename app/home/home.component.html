@@ -1,0 +1,91 @@
+<ActionBar title="Charts" class="action-bar">
+	<DockLayout stretchLastChild="false">
+		<Button [nsRouterLink]="['/calendar']" text="Home" dock="left"></Button>
+		<Button (tab)="sendReport()" text="Send" dock="right" marginLeft="20px"></Button>
+	</DockLayout>
+</ActionBar>
+
+<TabView #tabs height="100%">
+	<StackLayout *tabItem="{title: 'Area Chart'}">
+		<GridLayout rows="auto, *" height="1000px">
+			<Label row="0" text="Complaence Assurece, 2018" class="chart-example-tytle-style" textWrap="true"></Label>
+			<RadCartesianChart row="1">
+				<LinearAxis lineColor="#b0b0b0" lineThickness="1" tkCartesianVerticalAxis></LinearAxis>
+
+				<!-- <CategoricalAxis lineColor="#b0b0b0" lineThickness="1" tkCartesianHorizontalAxis></CategoricalAxis> -->
+				<!-- <DateTimeContinuousAxis LabelFitMode="MultiLine" LabelFormat="MMM yyyy"/> -->
+				<DateTimeCategoricalAxis labelFormat="hh:mm" lineColor="#b0b0b0" lineThickness="1" tkCartesianHorizontalAxis></DateTimeCategoricalAxis>
+
+				<AreaSeries tkCartesianSeries seriesName="Area" categoryProperty="Label" [items]="dataSource.Data.Values" stackMode="Stack"
+				 valueProperty="Value" selectionMode="Series"></AreaSeries>
+				<AreaSeries tkCartesianSeries seriesName="Area" categoryProperty="Label" [items]="dataSource2.Data.Values" stackMode="Stack"
+				 valueProperty="Value" selectionMode="Series"></AreaSeries>
+
+				<RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true" verticalStripLinesVisible="false"
+				 horizontalStripLinesVisible="false" horizontalStrokeColor="#e5e5e5"></RadCartesianChartGrid>
+
+				<Palette tkCartesianPalette seriesName="Area">
+					<PaletteEntry tkCartesianPaletteEntry android:fillColor="#b2efe6" ios:fillColor="#7fe5faf6" strokeColor="#08caab" strokeWidth="2"></PaletteEntry>
+					<PaletteEntry tkCartesianPaletteEntry android:fillColor="#b2d2d1" ios:fillColor="#7fe5f0f0" strokeColor="#026968" strokeWidth="2"></PaletteEntry>
+				</Palette>
+
+			</RadCartesianChart>
+		</GridLayout>
+	</StackLayout>
+	<StackLayout *tabItem="{title: 'Bar Chart'}">
+		<GridLayout rows="*" height="1000px">
+			<RadCartesianChart row="0" backgroundColor="#403e48" color="#fff" tkToggleNavButton>
+				<CategoricalAxis tkCartesianHorizontalAxis labelTextColor="#d4d2de"></CategoricalAxis>
+				<LinearAxis tkCartesianVerticalAxis labelTextColor="#d4d2de"></LinearAxis>
+
+
+				<BarSeries stackMode="Stack" showTrackInfo="true" showIntersectionPoints="true" seriesName="Bar1" tkCartesianSeries [items]="dataSource.Data.Values"
+				 categoryProperty="Label" valueProperty="Value">
+					<!-- <PointLabelStyle tkBarLabelStyle margin="10" fontStyle="Bold" fillColor="#FC6060" textSize="10" textColor="White"></PointLabelStyle> -->
+				</BarSeries>
+				<BarSeries stackMode="Stack" seriesName="Bar2" tkCartesianSeries [items]="dataSource2.Data.Values" categoryProperty="Label"
+				 valueProperty="Value"></BarSeries>
+
+				<Palette tkCartesianPalette seriesName="Bar1">
+					<PaletteEntry tkCartesianPaletteEntry fillColor="#ffc65c" strokeColor="#d5a855"></PaletteEntry>
+				</Palette>
+				<Palette tkCartesianPalette seriesName="Bar2">
+					<PaletteEntry tkCartesianPaletteEntry fillColor="#fe8080" strokeColor="#de7777"></PaletteEntry>
+				</Palette>
+			</RadCartesianChart>
+		</GridLayout>
+	</StackLayout>
+	<StackLayout *tabItem="{title: 'Guage Chart'}">
+		<RadRadialGauge class="gauge">
+			<RadialScale #myScale tkRadialGaugeScales startAngle="0" sweepAngle="360" minimum="0" maximum="100" radius="0.9">
+				<ScaleStyle tkRadialScaleStyle ticksVisible="false" labelsVisible="false" lineThickness="0"></ScaleStyle>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="100" location="0.5">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="rgba(224,151,36,0.5)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="100" location="0.5">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle cap="Round" fillColor="rgba(224,151,36,1)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="100" location="0.75">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="rgba(196,241,57,0.5)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="{{recordedPie}}" location="0.75" isAnimated="true">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle cap="Round" fillColor="rgba(196,241,57,1)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="100" location="1">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle fillColor="rgba(132,235,247,0.5)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<RadialBarIndicator tkRadialScaleIndicators minimum="0" maximum="40" location="1" isAnimated="true">
+					<BarIndicatorStyle tkRadialBarIndicatorStyle cap="Round" fillColor="rgba(132,235,247,1)" barWidth="0.2"></BarIndicatorStyle>
+				</RadialBarIndicator>
+
+				<!-- <RadLegendView tkCartesianLegend position="Left" title="Series type" height="50" enableSelection="true"></RadLegendView> -->
+			</RadialScale>
+		</RadRadialGauge>
+	</StackLayout>
+</TabView>
