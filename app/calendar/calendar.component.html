@@ -5,5 +5,8 @@
 </ActionBar>
 
 <StackLayout>
-	<RadCalendar height="100%"></RadCalendar>
+	<Label [text]="startDate"></Label>
+	<Label [text]="endDate"></Label>
+	<RadCalendar #calendar height="50%" [selectionMode]="selectionMode" [eventSource]="eventSource" (dateSelected)="onDateSelected($event)"></RadCalendar>
+
 </StackLayout>

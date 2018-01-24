@@ -5,10 +5,11 @@
 	</DockLayout>
 </ActionBar>
 
-<TabView #tabs height="100%">
-	<StackLayout *tabItem="{title: 'Area Chart'}">
+<TabView class="tab-view" #tabs height="100%">
+	<StackLayout class="tab-item" *tabItem="{title: 'Area Chart'}" >
+		<SegmentedBar [items]="items" (selectedIndexChange)="onSelectedIndexChange($event)" class="m-5" ></SegmentedBar>
 		<GridLayout rows="auto, *" height="1000px">
-			<Label row="0" text="Complaence Assurece, 2018" class="chart-example-tytle-style" textWrap="true"></Label>
+			<Label class="h2 m-t-16 " row="0" text="Complaence Assurece, 2018" class="chart-example-tytle-style" textWrap="true"></Label>
 			<RadCartesianChart row="1">
 				<LinearAxis lineColor="#b0b0b0" lineThickness="1" tkCartesianVerticalAxis></LinearAxis>
 
